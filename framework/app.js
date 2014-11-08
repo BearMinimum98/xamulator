@@ -1,7 +1,6 @@
 ﻿/**
  * Module dependencies.
  */
-
 var express = require('express'),
 	http = require('http'),
 	path = require('path'),
@@ -22,7 +21,9 @@ var express = require('express'),
 app.set('port', process.env.PORT || 1337);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(logger({path: 'logs/log.txt'}));
+app.use(logger({
+	path: 'logs/log.txt'
+}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -41,7 +42,7 @@ var connection = mysql.createConnection({
 
 
 /** all functions and code definitions go below
-*/
+ */
 
 var dateNow = new Date().toISOString().slice(0, 19).replace("T", " ");
 
@@ -55,28 +56,28 @@ function shuffle(array) {
 	return array;
 }
 
-function log(msg){
-	if (console !== undefined && msg !== undefined){
+function log(msg) {
+	if (console !== undefined && msg !== undefined) {
 		console.log(msg);
 	}
 }
-function formatquestionsDbEntries(reference, questionsArray){
-		var result = [null];
 
-		for (var i = 0; i < array.legnth; i++){
+function formatquestionsDbEntries(reference, questionsArray) {
+		var result = [null];
+		for (var i = 0; i < array.legnth; i++) {
 			result.push()
 		}
 		return result;
-}
-//Inserting into Db should only be used for inserting after array of values has been correctly formatted
-//Use formatDB_NAMEDbEntries for formatted Array
-function insertIntoDb(db, array){
-		if (array !== undefined && db !== undefined){
-				var format = '%s';
-				for (var i = 0; i<array.length -1; i++){
-					format = "%s, " + format;
-				}
-				connection.query(connection.escape(sprintf("INSERT INTO %s VALUES " + vsprintf(format, [null].concat(array)), db)));
+	}
+	//Inserting into Db should only be used for inserting after array of values has been correctly formatted
+	//Use formatDB_NAMEDbEntries for formatted Array
+function insertIntoDb(db, array) {
+	if (array !== undefined && db !== undefined) {
+		var format = '%s';
+		for (var i = 0; i < array.length - 1; i++) {
+			format = "%s, " + format;
+		}
+		connection.query(connection.escape(sprintf("INSERT INTO %s VALUES " + vsprintf(format, [null].concat(array)), db)));
 	}
 }
 
@@ -90,50 +91,50 @@ app.post('/newtest', function(request, response) {
 	response.json(request.body);
 	var body = request.body,
 		answersCounted = 0,
-		limit; 
+		limit;
 
 	//All form information together
 	var entries = {
-			"tests": [
-				connection.escape(body.testName),
-				connection.escape(body.testPoints),
-				connection.escape(dateNow),
-				connection.escape(body.datetimeTest.replace("T", " ")),
-				connection.escape((new Date(body.datetimeTest).parse() <= dateNow.parse()) ? 0:1),
-				connection.escape(1),
-				connection.escape(0),
-				connection.escape('') //examtime ?
-			],
+		"tests": [
+			connection.escape(body.testName),
+			connection.escape(body.testPoints),
+			connection.escape(dateNow),
+			connection.escape(body.datetimeTest.replace("T", " ")),
+			connection.escape((new Date(body.datetimeTest).parse() <= dateNow.parse()) ? 0 : 1),
+			connection.escape(1),
+			connection.escape(0),
+			connection.escape('') //examtime ?
+		],
 
-			"questions": [
-				connection.escape(body.questionType), //questiontype
-				connection.escape(body.question), //questionContent
-				connection.escape(JSON.stringify(body.answer)), //answers
-				connection.escape(body.correctAnswer), //correctAnswer
-				connection.escape(testId), //Test Foreign Key not null
-				connection.escape(''), //Fullpoints
-				connection.escape(''), //noAnswerPoints
-				connection.escape(''), //wrongAnswerPoints
-				connection.escape('') //isRandom
-		 	]
-		
+		"questions": [
+			connection.escape(body.questionType), //questiontype
+			connection.escape(body.question), //questionContent
+			connection.escape(JSON.stringify(body.answer)), //answers
+			connection.escape(body.correctAnswer), //correctAnswer
+			connection.escape(testId), //Test Foreign Key not null
+			connection.escape(''), //Fullpoints
+			connection.escape(''), //noAnswerPoints
+			connection.escape(''), //wrongAnswerPoints
+			connection.escape('') //isRandom
+		]
+
 	};
 	//Insert test information into databse
 	insertIntoDb("tests", entries.tests);
 	//Retrieve from database the proper testId Foreign Key and sets all of the Foreign Key References to the Correct Foreign Key
-	connection.query("SELECT P_Id FROM tests ORDER BY P_Id DESC LIMIT 1", function(err, row, fields){
-		if (rows[0].P_Id !== null){
+	connection.query("SELECT P_Id FROM tests ORDER BY P_Id DESC LIMIT 1", function(err, row, fields) {
+		if (rows[0].P_Id !== null) {
 			entries.question[4] = rows[0].P_Id;
 		}
 	});
 
 	//One question case
-	if (typeof(entries.questions[0] === "string")){
+	if (typeof(entries.questions[0] === "string")) {
 		insertIntoDb("questions", entries.questions)
 	}
 	//Many questions case
 	else {
-		for (var i = 0; i < entries.questions[0].legnth; i++){
+		for (var i = 0; i < entries.questions[0].legnth; i++) {
 			insertIntoDb("questions", formatDbEntries(i, entries.questions))
 		}
 	}
@@ -150,7 +151,9 @@ app.post("/login/", function(request, response) {
 				// send auth token????
 			}
 		} else {
-			response.json({"error": "no such user found"});
+			response.json({
+				"error": "no such user found"
+			});
 		}
 	});
 	request.body.username;
@@ -167,20 +170,34 @@ app.post("/taketest/", function(req, res) {
 				connection.query("SELECT * FROM questions WHERE test=" + connection.escape(body), function(err, rows, field) {
 					var questionArray = [];
 					rows.forEach(function(e) {
-						questionArray.push({"question": e.questionContent, "answers": JSON.parse(e.answersJSON), "type": e.questiontype});
+						questionArray.push({
+							"question": e.questionContent,
+							"answers": JSON.parse(e.answersJSON),
+							"type": e.questiontype
+						});
 					});
 					// parse test and send test here.
 					if (!isRandomized) {
-						res.json({"error": null, "test": questionArray});
+						res.json({
+							"error": null,
+							"test": questionArray
+						});
 					} else {
-						res.json({"error": null, "test": shuffle(questionArray)});
+						res.json({
+							"error": null,
+							"test": shuffle(questionArray)
+						});
 					}
 				});
 			} else {
-				res.json({"error": "test not available"});
+				res.json({
+					"error": "test not available"
+				});
 			}
 		} else {
-			res.json({"error": "test not found"});
+			res.json({
+				"error": "test not found"
+			});
 		}
 	});
 
@@ -231,14 +248,14 @@ app.post("/gradetest/", function(req, res) {
 	}
 	// Mock storing into DB
 	/*
-	* connection.query("INSERT INTO TABLE ??? VALUES (" + connection.escape(totalPoints) + ", " + connection.escape(body.studentId) + ")");
-	*/
+	 * connection.query("INSERT INTO TABLE ??? VALUES (" + connection.escape(totalPoints) + ", " + connection.escape(body.studentId) + ")");
+	 */
 });
 
 server = http.createServer(app);
 // development only
 // if ('development' == app.get('env')) {
-	// app.use(expressErrorHandler({server: server}));
+// app.use(expressErrorHandler({server: server}));
 // }
 
 server.listen(app.get("port"), function() {
