@@ -24,6 +24,7 @@
 		"express-error-handler": "*",
 		"express-logger": "*",
 		"body-parser": "*",
-		"passport": "*"
+		"passport": "*",
+		"sequelize": "*"
 	}
 }
