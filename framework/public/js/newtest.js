@@ -2,7 +2,7 @@ function addUp() {
 	var questionsJSON = {};
 	questionsJSON.test = {
 		"name": document.getElementsByName("testName")[0].value,
-		"points": document.getElementsByName("datetimeTest")[0].value,
+		"points": document.getElementsByName("testPoints")[0].value,
 		"time": document.getElementsByName("datetimeTest")[0].value
 	};
 	questionsJSON.questions = [];

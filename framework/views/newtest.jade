@@ -47,7 +47,7 @@ block pageContent
 			form(action='/newtest' method='post' id = "newtestCreation")
 				.panel
 					.row
-						.large-7.columns
+						.large-5.columns
 							input(type = "text" placeholder="Test Name" name="testName")
 						.large-3.columns
 							input(type="datetime-local" name="datetimeTest" placeholder="Date of Test")
@@ -158,4 +158,4 @@ block pageContent
 
 					.row
 						.large-12.columns
-						input(name='submit' value='Submit' type='submit' onclick='return false;handleSubmit()')
+						input(name='submit' value='Submit' type='submit' onclick='handleSubmit(); return false;')
