@@ -25,6 +25,7 @@
 		"express-logger": "*",
 		"body-parser": "*",
 		"passport": "*",
-		"sequelize": "*"
+		"sequelize": "*",
+		"pg": "*"
 	}
 }
