@@ -122,9 +122,9 @@ app.post('/newtest', function(request, response) {
 			content: e.content, 
 			answers: e.answers, 
 			correct: e.correct,
-			correctAnswerPoints: (parseInt(e.correctAnswerPoints) != NaN ? 0 : parseInt(e.correctAnswerPoints)),
-			noAnswerPoints: (parseInt(e.noAnswerPoints) != NaN ? 0 : parseInt(e.noAnswerPoints)), 
-			wrongAnswerPoints: (parseInt(e.wrongAnswerPoints) != NaN ? 0 : parseInt(e.wrongAnswerPoints)), 
+			correctAnswerPoints: (parseInt(e.correctAnswerPoints) != NaN ? null : parseInt(e.correctAnswerPoints)),
+			noAnswerPoints: (parseInt(e.noAnswerPoints) != NaN ?null : parseInt(e.noAnswerPoints)), 
+			wrongAnswerPoints: (parseInt(e.wrongAnswerPoints) != NaN ? null : parseInt(e.wrongAnswerPoints)), 
 			random: parseInt(e.random)
 		}); 
 	});
