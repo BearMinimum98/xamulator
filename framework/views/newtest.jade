@@ -1,15 +1,16 @@
 extends layout
 
 block pageContent
-	.panel(style='width:15%;height:100%;position:absolute;')
+	.panel(style='width:17%;height:100%;position:absolute;background-color:#EEE;position:fixed')
 	.row.primary
 		.large-12.columns
-			center
-				h1.title(style="font-family: 'Lobster', cursive; font-size:340%") Dashboard
-		br
+			
 	.large-2.columns
 		br
 	.large-10.columns
+		center
+				h1.title(style="font-family: 'Lobster', cursive; font-size:340% ") Dashboard
+		br
 		.row
 			.large-12.columns
 				form(action='/newtest' method='post' id = "newtestCreation")
@@ -29,32 +30,32 @@ block pageContent
 								.row
 									.callout.panel
 										.row
-											.large-3.columns
-												center
-													h4 Question Type
-												br
-												select(form='newtestCreation' name='questionType' class="question-type")
-													option(value='mtpl') Multiple Choice
-													option(value='shrt') Short Answer
-													option(value='mtch') Matching
-													option(value='othr') Other
+											.large-12.columns
+												
 												br
 												br
 												row												
 													.row.collapse
 														.small-2.columns
+															h5( align="center") Question Type
+														.small-1.columns
+															br
+														.small-5.columns
+															select(form='newtestCreation' name='questionType' class="question-type")
+																option(value='mtpl') Multiple Choice
+																option(value='shrt') Short Answer
+																option(value='mtch') Matching
+																option(value='othr') Other
+														.small-1.columns
+															br
+														.small-1.columns
 															span.prefix Worth
-														.small-2.columns
+														.small-1.columns
 															input(name='points' type='number' min='1', placeholder='')
-														.small-2.columns
+														.small-1.columns
 															span.postfix Pts.
-														.small-6.columns
-															center
-																input(id="checkbox1" name='randomnized' type='checkbox')
-																label(for='random') Randomize?								
-											.large-1.columns
+							
 												br
-											.large-8.columns
 												center
 													h4 Question Info
 												.row
@@ -85,6 +86,10 @@ block pageContent
 																					option(value='b') B
 																					option(value='c') C
 																					option(value='d') D
+																	h6
+																		input(id="checkbox1" name='randomnized' type='checkbox')
+																		label(for='random') Randomize?		
+
 															.small-9.columns
 																.row
 																	.large-12.columns
