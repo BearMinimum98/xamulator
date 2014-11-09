@@ -112,6 +112,9 @@ app.post('/newtest', function(request, response) {
 		points: parseInt(body.test.points), 
 		testDate: convertDatetimeToPostgresql(new Date(body.test.time)),
 		randomized: parseInt(0)
+	}).error(function(err){
+		log(err);
+
 	});
 	body.questions.forEach(function(e) {
 		Question.create({
