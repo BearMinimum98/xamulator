@@ -26,11 +26,10 @@ function answerChoices(amt, qNumbers) {
 	}
 	return returnArr;
 }
-function sendQuestionsToServer() {
+function handleSubmit() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/newtest/", false);
 	xhr.send(JSON.stringify(addUp()));
-	alert("yay");
 	return false;
 }
 
