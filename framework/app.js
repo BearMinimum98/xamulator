@@ -39,15 +39,16 @@ var Sequelize = require('sequelize'), sequelize = new Sequelize('xamulatordb', '
 });
 // Objects to use with Sequelize
 var Test = sequelize.define('Test', {
-	name: Sequelize.STRING,
+	id: {type: Sequelize.INTEGER, allowNull: false, autoIncrement: true},
+	name: {type: Sequelize.STRING, allowNull: false},
 	points: Sequelize.INTEGER,
-	created: Sequelize.DATE,
+	created: {type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 	testDate: Sequelize.DATE,
-	available: Sequelize.BOOLEAN,
-	randomized: Sequelize.BOOLEAN
+	available: {type: Sequelize.BOOLEAN, defaultValue: false},
+	randomized: {type: Sequelize.BOOLEAN, defaultValue: false} 
 });
 var Question = sequelize.define('Question', {
-	type: Sequelize.STRING,	
+	type: {type: Sequelize.STRING, allowNull: true},	
 	content: Sequelize.TEXT,
 	answers: Sequelize.TEXT,
 	correct: Sequelize.TEXT,
@@ -103,33 +104,57 @@ app.post('/newtest', function(request, response) {
 	connection.connect();
 	response.set("Access-Control-Allow-Origin", "*");
 	response.json(request.body);
-	var body = request.body,
-		answersCounted = 0,
-		limit;
-	
+	var body = JSON.parse(request.body);
+	Test.create({name: body.test.name, points: body.test.points, testDate: null,randomized: 0})
+	body.questions.forEach(function(e) {
+		Question.create({
+			type: e.type, 
+			content: e.content, 
+			answers: e.answers, 
+			correct: e.correct,
+			correctAnswerPoints: e.correctAnswerPoints,
+			noAnswerPoints: e.noAnswerPoints, 
+			wrongAnswerPoints: e.wrongAnswerPoints, 
+			random: e.random
+		}); 
+	});
 
 
 	//Redirect user to a finsh page - NEEDS TO BE IMPLEMENTED
 	response.redirect('/');
+	connection.end()
 });
+app.post('/modifytest', function(request, response) {
+	//Receives a JSON object that must include two selectors: modify, remove
+	connection.connect();
+	var body = JSON.parse(request.body);
+	if (body.modify.)
+
+	connection.end();
+})
+app.post('/edittest', function(request, response) {
+	//Allows teacher to edit an already created test
+	connection.connect();
+	response.set("Access-Control-Allow-Origin");
+	var body = JSON.parse(request.body);
+	test = Test.find({where: {id: body.id} }).success(function(project){
+
+	})
+
+	connection.end()
+})
 
 app.post("/login/", function(request, response) {
-	connection.query("SELECT * FROM students WHERE username='" + connection.escape(request.body.username) + "'", function(err, rows, fields) {
-		if (rows.length > 0) {
-			if (rows[0].password == request.body.password) {
-				// send auth token????
-			}
-		} else {
-			response.json({
-				"error": "no such user found"
-			});
-		}
-	});
+	connection.connect();
+
+	
 	request.body.username;
 	request.body.password;
+	connection.end();
 });
 // Get test questions
 app.post("/taketest/", function(req, res) {
+	connection.connect()
 	res.set("Access-Control-Allow-Origin", "*");
 	var body = req.body;
 		
