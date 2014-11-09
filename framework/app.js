@@ -43,7 +43,6 @@ var Test = sequelize.define('Test', {
 	id: {type: Sequelize.INTEGER, allowNull: false, autoIncrement: true},
 	name: {type: Sequelize.STRING, allowNull: false},
 	points: Sequelize.INTEGER,
-	created: {type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 	testDate: Sequelize.DATE,
 	available: {type: Sequelize.BOOLEAN, defaultValue: false},
 	randomized: {type: Sequelize.BOOLEAN, defaultValue: false} 
@@ -80,9 +79,9 @@ Test.belongsTo(Classes);
 /** 
  * all functions and code definitions go below
  */
-
-var dateNow = new Date().toISOString().slice(0, 19).replace("T", " ");
-
+function convertDatetimeToPostgresql(date){
+	return date.toISOString().slice(0, 19).replace("T", " ");
+}
 function shuffle(array) {
 	for (var i = array.length - 1; i > 0; i--) {
 		var j = Math.floor(Math.random() * (i + 1));
@@ -106,9 +105,14 @@ app.get('/test', test.index);
 app.get('/newtest', newtest.index);
 app.post('/newtest', function(request, response) {
 	response.set("Access-Control-Allow-Origin", "*");
-	response.write(request.body);
+	log(request.body);
 	var body = JSON.parse(request.body);
-	Test.create({name: body.test.name, points: body.test.points, testDate: null,randomized: 0})
+	Test.create({
+		name: body.test.name, 
+		points: body.test.points, 
+		testDate: convertDatetimeToPostgresql(new Date(body.test.time)),
+		randomized: 0
+	});
 	body.questions.forEach(function(e) {
 		Question.create({
 			type: e.type, 
@@ -124,7 +128,9 @@ app.post('/newtest', function(request, response) {
 
 
 	//Redirect user to a finsh page - NEEDS TO BE IMPLEMENTED
-	response.redirect('/');
+	response.writeHead(301, {Location: "http://localhost:1337"});
+	response.end();
+	log("done");
 });
 app.post('/modifytest', function(request, response) {
 	//Receives a JSON object that must include two selectors: modify, remove
