@@ -109,9 +109,9 @@ app.post('/newtest', function(request, response) {
 	var body = JSON.parse(request.body);
 	Test.create({
 		name: body.test.name, 
-		points: body.test.points, 
+		points: parseInt(body.test.points), 
 		testDate: convertDatetimeToPostgresql(new Date(body.test.time)),
-		randomized: 0
+		randomized: parseInt(0)
 	});
 	body.questions.forEach(function(e) {
 		Question.create({
@@ -119,10 +119,10 @@ app.post('/newtest', function(request, response) {
 			content: e.content, 
 			answers: e.answers, 
 			correct: e.correct,
-			correctAnswerPoints: e.correctAnswerPoints,
-			noAnswerPoints: e.noAnswerPoints, 
-			wrongAnswerPoints: e.wrongAnswerPoints, 
-			random: e.random
+			correctAnswerPoints: parseInt(e.correctAnswerPoints),
+			noAnswerPoints: parseInt(e.noAnswerPoints), 
+			wrongAnswerPoints: parseInt(e.wrongAnswerPoints), 
+			random: parseInt(e.random)
 		}); 
 	});
 
