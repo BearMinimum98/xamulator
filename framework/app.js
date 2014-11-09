@@ -123,7 +123,7 @@ app.post('/newtest', function(request, response) {
 			answers: e.answers, 
 			correct: e.correct,
 			correctAnswerPoints: (parseInt(e.correctAnswerPoints) != NaN ? null : parseInt(e.correctAnswerPoints)),
-			noAnswerPoints: (parseInt(e.noAnswerPoints) != NaN ?null : parseInt(e.noAnswerPoints)), 
+			noAnswerPoints: (parseInt(e.noAnswerPoints) != NaN ? null : parseInt(e.noAnswerPoints)), 
 			wrongAnswerPoints: (parseInt(e.wrongAnswerPoints) != NaN ? null : parseInt(e.wrongAnswerPoints)), 
 			random: parseInt(e.random)
 		}); 
