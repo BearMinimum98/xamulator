@@ -1,136 +1,138 @@
 extends layout
 
 block pageContent
+	.panel(style='width:17%;height:100%;position:absolute;background-color:#EEE;position:fixed')
 	.row.primary
 		.large-12.columns
-			center
-				h1.title(style="font-family: 'Lobster', cursive; font-size:340%") Dashboard
+			
+	.large-2.columns
 		br
-	.row
-		.large-12.columns
-			.panel
-				.row
-					.large-4.columns
-						.callout.panel
-					.large-4.columns
-						.callout.panel
-					.large-4.columns
-						.callout.panel
-	.row
-		.large-12.columns
-			form(action='/newtest' method='post' id = "newtestCreation")
-				.panel
-					.row
-						.large-5.columns
-							input(type = "text" placeholder="Test Name" name="testName")
-						.large-3.columns
-							input(type="datetime-local" name="datetimeTest" placeholder="Date of Test")
-						.large-2.columns
-							input(type = "text" placeholder = "Test Points" name="testPoints")
-					.row
-						.large-12.columns
-							
-					div(ng-repeat='question in questions'  class="question-block")
-						.form-group
-							.row
-								.callout.panel
-									.row
-										.large-3.columns
-											center
-												h4 Question Type
-											select(form='newtestCreation' name='questionType' class="question-type")
-												option(value='mtpl') Multiple Choice
-												option(value='shrt') Short Answer
-												option(value='mtch') Matching
-												option(value='othr') Other
-											row
-												.large-12.columns
-													center
-														input(id="checkbox1" name='randomnized' type='checkbox')
-														label(for='random') Randomize?
+	.large-10.columns
+		center
+				h1.title(style="font-family: 'Lobster', cursive; font-size:350% ") Dashboard
+		br
+		.row
+			.large-12.columns
+				form(action='/newtest' method='post' id = "newtestCreation")
+					.panel
+						.row
+							.large-5.columns
+								input(type = "text" placeholder="Test Name" name="testName")
+							.large-3.columns
+								input(type="datetime-local" name="datetimeTest" placeholder="Date of Test")
+							.large-2.columns
+								input(type = "text" placeholder = "Test Points" name="testPoints")
+						.row
+							.large-12.columns
+								
+						div(ng-repeat='question in questions'  class="question-block")
+							.form-group
+								.row
+									.callout.panel
+										.row
+											.large-12.columns
 												
-												.row.collapse
-													.small-5.columns
-														span.prefix Worth
-													.small-4.columns
-														input(name='points' type='number', placeholder='')
-													.small-3.columns
-														span.postfix Pts.
-										.large-1.columns
-											br
-										.large-8.columns
-											center
-												h4 Question Info
-											.row
-												.large-12.columns
+												br
+												br
+												row												
 													.row.collapse
 														.small-2.columns
-															span.prefix Question:
-														.small-10.columns
-															input.form-control.medform(name='question' type='text', placeholder='e.g. How big is China?', ng-model='item.text')
-											.row
-												.large-12.columns
-													.row.collapse
-														.small-2.columns
+															h5( align="center" style="padding-top: 4%") Question Type
+														.small-1.columns
 															br
-															center
-																h6 # Answer Choices
-															select(form='newtestCreation' name='amtAnswers')
-																option(value='2') 2
-																option(value='3') 3
-																option(value='4') 4
-																option(value='5') 5
-															center
-																h6 Correct Answer
-																	select(form='newtestCreation' name='correctAnswer')
-																		div(ng-repeat='answer in answers')
-																			.form-group
-																				option(value='a') A
-														.small-9.columns
-															.row
-																.large-12.columns
-																	.row.collapse
-																		.small-2.columns
-																			span.prefix A:
-																		.small-10.columns
-																			input(type='text', name='answer', placeholder='Apple')
-															.row
-																.large-12.columns
-																	.row.collapse
-																		.small-2.columns
-																			span.prefix B:
-																		.small-10.columns
-																			input(type='text',name='answer', placeholder='Banana')
-															.row
-																.large-12.columns
-																	.row.collapse
-																		.small-2.columns
-																			span.prefix C:
-																		.small-10.columns
-																			input(type='text',name='answer',placeholder='Carrot')
-															.row
-																.large-12.columns
-																	.row.collapse
-																		.small-2.columns
-																			span.prefix D:
-																		.small-10.columns
-																			input(type='text', placeholder='Daikon')
-												h4(style='float:right;margin-top:-125px;margin-right:-25px;', align='right')
-													font(color='F21111') x
-										.large-2.columns
-											a
-												
-											.row
+														.small-5.columns
+															select(form='newtestCreation' name='type0' class="question-type")
+																option(value='mtpl') Multiple Choice
+																option(value='shrt') Short Answer
+																option(value='mtch') Matching
+																option(value='othr') Other
+														.small-1.columns
+															br
+														.small-1.columns
+															span.prefix Worth
+														.small-1.columns
+															input(name='points0' type='number' min='1', placeholder='')
+														.small-1.columns
+															span.postfix Points
+							
 												br
-												br
-												
-						br
-					.row
-						.large-12.columns
-							center
-								a.medium.radius.button(ng-click='newQuestion()') Kevin Zhou super Troll (aka add question)
+												center
+													h4 Question Info
+													br
+												.row
+													.large-12.columns
+														.row.collapse
+															.small-2.columns
+																span.prefix Question:
+															.small-10.columns
+																input.form-control.medform(name='question0' type='text', placeholder='e.g. How big is China?', ng-model='item.text')
+												.row
+													.large-12.columns
+														.row.collapse
+															.small-2.columns
+																br
+																center
+																	h6 # Answer Choices
+																select(form='newtestCreation' name='amtAnswers0')
+																	option(value='2') 2
+																	option(value='3') 3
+																	option(value='4') 4
+																	option(value='5') 5
+																center
+																	h6 Correct Answer
+																		select(form='newtestCreation' name='correctAnswer0')
+																			div(ng-repeat='answer in answers')
+																				.form-group
+																					option(value='a') A
+																					option(value='b') B
+																					option(value='c') C
+																					option(value='d') D
+																	h6
+																		input(id="checkbox1" name='randomized0' type='checkbox')
+																		label(for='random') Randomize?		
 
-					.row
-						.large-12.columns
-						input(name='submit' value='Submit' type='submit' onclick='handleSubmit(); return false;')
+															.small-9.columns
+																.row
+																	.large-12.columns
+																		.row.collapse
+																			.small-2.columns
+																				span.prefix A:
+																			.small-10.columns
+																				input(type='text', name='answer0', placeholder='Apple')
+																.row
+																	.large-12.columns
+																		.row.collapse
+																			.small-2.columns
+																				span.prefix B:
+																			.small-10.columns
+																				input(type='text',name='answer0', placeholder='Banana')
+																.row
+																	.large-12.columns
+																		.row.collapse
+																			.small-2.columns
+																				span.prefix C:
+																			.small-10.columns
+																				input(type='text',name='answer0',placeholder='Carrot')
+																.row
+																	.large-12.columns
+																		.row.collapse
+																			.small-2.columns
+																				span.prefix D:
+																			.small-10.columns
+																				input(type='text', name='answer0', placeholder='Daikon')
+											.large-2.columns
+												a
+													
+												.row
+													br
+													br
+													
+							br
+						.row
+							.large-12.columns
+								center
+									a.medium.radius.button(ng-click='newQuestion()') Kevin Zhou super Troll (aka add question)
 
+						.row
+							.large-12.columns
+								input(name='submit' value='Submit' type='submit' onclick='return handleSubmit(); return false;')
