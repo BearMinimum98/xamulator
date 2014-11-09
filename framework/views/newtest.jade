@@ -41,7 +41,7 @@ block pageContent
 														.small-1.columns
 															br
 														.small-5.columns
-															select(form='newtestCreation' name='questionType' class="question-type")
+															select(form='newtestCreation' name='type0' class="question-type")
 																option(value='mtpl') Multiple Choice
 																option(value='shrt') Short Answer
 																option(value='mtch') Matching
@@ -51,7 +51,7 @@ block pageContent
 														.small-1.columns
 															span.prefix Worth
 														.small-1.columns
-															input(name='points' type='number' min='1', placeholder='')
+															input(name='points0' type='number' min='1', placeholder='')
 														.small-1.columns
 															span.postfix Points
 							
@@ -65,7 +65,7 @@ block pageContent
 															.small-2.columns
 																span.prefix Question:
 															.small-10.columns
-																input.form-control.medform(name='question' type='text', placeholder='e.g. How big is China?', ng-model='item.text')
+																input.form-control.medform(name='question0' type='text', placeholder='e.g. How big is China?', ng-model='item.text')
 												.row
 													.large-12.columns
 														.row.collapse
@@ -73,14 +73,14 @@ block pageContent
 																br
 																center
 																	h6 # Answer Choices
-																select(form='newtestCreation' name='amtAnswers')
+																select(form='newtestCreation' name='amtAnswers0')
 																	option(value='2') 2
 																	option(value='3') 3
 																	option(value='4') 4
 																	option(value='5') 5
 																center
 																	h6 Correct Answer
-																		select(form='newtestCreation' name='correctAnswer')
+																		select(form='newtestCreation' name='correctAnswer0')
 																			div(ng-repeat='answer in answers')
 																				.form-group
 																					option(value='a') A
@@ -88,7 +88,7 @@ block pageContent
 																					option(value='c') C
 																					option(value='d') D
 																	h6
-																		input(id="checkbox1" name='randomnized' type='checkbox')
+																		input(id="checkbox1" name='randomized0' type='checkbox')
 																		label(for='random') Randomize?		
 
 															.small-9.columns
@@ -98,28 +98,28 @@ block pageContent
 																			.small-2.columns
 																				span.prefix A:
 																			.small-10.columns
-																				input(type='text', name='answer', placeholder='Apple')
+																				input(type='text', name='answer0', placeholder='Apple')
 																.row
 																	.large-12.columns
 																		.row.collapse
 																			.small-2.columns
 																				span.prefix B:
 																			.small-10.columns
-																				input(type='text',name='answer', placeholder='Banana')
+																				input(type='text',name='answer0', placeholder='Banana')
 																.row
 																	.large-12.columns
 																		.row.collapse
 																			.small-2.columns
 																				span.prefix C:
 																			.small-10.columns
-																				input(type='text',name='answer',placeholder='Carrot')
+																				input(type='text',name='answer0',placeholder='Carrot')
 																.row
 																	.large-12.columns
 																		.row.collapse
 																			.small-2.columns
 																				span.prefix D:
 																			.small-10.columns
-																				input(type='text', placeholder='Daikon')
+																				input(type='text', name='answer0', placeholder='Daikon')
 											.large-2.columns
 												a
 													
@@ -135,4 +135,4 @@ block pageContent
 
 						.row
 							.large-12.columns
-								input(name='submit' value='Submit' type='submit' onclick='handleSubmit(); return false;')
+								input(name='submit' value='Submit' type='submit' onclick='return handleSubmit(); return false;')

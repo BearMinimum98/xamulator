@@ -29,6 +29,7 @@ function answerChoices(amt, qNumbers) {
 function handleSubmit() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/newtest/", false);
+	console.log(JSON.stringify(addUp()));
 	xhr.send(JSON.stringify(addUp()));
 	return false;
 }
