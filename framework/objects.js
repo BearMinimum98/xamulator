@@ -1,5 +1,7 @@
-var Sequelize = require('sequelize'), sequelize = new Sequelize('testing', 'angelhack', 'angelhack', {
-	host: "angelhack.c626h2danuwm.us-west-2.rds.amazonaws.com"
+var Sequelize = require('sequelize'), sequelize = new Sequelize('xamulatordb', 'xamulatoradmin', 'xamulatorswag', {
+	host: "xamulatordb.c626h2danuwm.us-west-2.rds.amazonaws.com",
+	port: 5432,
+	dialect: "postgres"
 });
 // Objects to use with Sequelize
 var Test = sequelize.define('Test', {
