@@ -1,6 +1,7 @@
 extends layout
 
 block pageContent
+<<<<<<< Updated upstream
 	.panel(style='width:17%;height:100%;position:absolute;background-color:#EEE;position:fixed')
 	.row.primary
 		.large-12.columns
@@ -11,6 +12,16 @@ block pageContent
 		center
 				h1.title(style="font-family: 'Lobster', cursive; font-size:340% ") Dashboard
 		br
+=======
+	.panel(style='width:25%;height:100%;position:fixed;background:#eee;')
+	.row.primary
+		.large-12.columns
+	.large-3.columns
+		br
+	.large-9.columns
+		center
+				h1.title(style="font-family: 'Lobster', cursive; font-size:340%") Dashboard
+>>>>>>> Stashed changes
 		.row
 			.large-12.columns
 				form(action='/newtest' method='post' id = "newtestCreation")
