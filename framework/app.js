@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Start sequelize
  */
+
 var Sequelize = require('sequelize'), sequelize = new Sequelize('postgres', 'xamulatoradmin', 'xamulatorswag', {
 	host: "xamulatordb.c626h2danuwm.us-west-2.rds.amazonaws.com",
 	port: 5432,
@@ -58,6 +59,7 @@ var Question = sequelize.define('Question', {
 	random: Sequelize.BOOLEAN
 });
 Test.hasMany(Question);
+Question.belongsTo(Test);
 
 var User = sequelize.define("User", {
 	username: Sequelize.STRING,
@@ -70,7 +72,9 @@ var Classes = sequelize.define("Class", {
 });
 Classes.hasOne(User, {as: "admin"});
 Classes.hasMany(User, {as: "student"});
+
 Classes.hasMany(Test);
+Test.belongsTo(Classes);
 // END SEQUELIZE
 
 /** 
@@ -101,9 +105,8 @@ app.get('/', routes.index);
 app.get('/test', test.index);
 app.get('/newtest', newtest.index);
 app.post('/newtest', function(request, response) {
-	connection.connect();
 	response.set("Access-Control-Allow-Origin", "*");
-	response.json(request.body);
+	response.write(request.body);
 	var body = JSON.parse(request.body);
 	Test.create({name: body.test.name, points: body.test.points, testDate: null,randomized: 0})
 	body.questions.forEach(function(e) {
@@ -122,39 +125,35 @@ app.post('/newtest', function(request, response) {
 
 	//Redirect user to a finsh page - NEEDS TO BE IMPLEMENTED
 	response.redirect('/');
-	connection.end()
 });
 app.post('/modifytest', function(request, response) {
 	//Receives a JSON object that must include two selectors: modify, remove
-	connection.connect();
-	var body = JSON.parse(request.body);
-	if (body.modify.)
 
-	connection.end();
+	var body = JSON.parse(request.body);
+	//if (body.modify.)
+
 })
 app.post('/edittest', function(request, response) {
 	//Allows teacher to edit an already created test
-	connection.connect();
 	response.set("Access-Control-Allow-Origin");
 	var body = JSON.parse(request.body);
 	test = Test.find({where: {id: body.id} }).success(function(project){
 
 	})
 
-	connection.end()
 })
 
 app.post("/login/", function(request, response) {
-	connection.connect();
+
 
 	
 	request.body.username;
 	request.body.password;
-	connection.end();
+
 });
 // Get test questions
 app.post("/taketest/", function(req, res) {
-	connection.connect()
+
 	res.set("Access-Control-Allow-Origin", "*");
 	var body = req.body;
 		
