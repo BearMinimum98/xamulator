@@ -38,24 +38,26 @@ block pageContent
 										.large-3.columns
 											center
 												h4 Question Type
+											br
 											select(form='newtestCreation' name='questionType' class="question-type")
 												option(value='mtpl') Multiple Choice
 												option(value='shrt') Short Answer
 												option(value='mtch') Matching
 												option(value='othr') Other
-											row
-												.large-12.columns
-													center
-														input(id="checkbox1" name='randomnized' type='checkbox')
-														label(for='random') Randomize?
-												
+											br
+											br
+											row												
 												.row.collapse
-													.small-5.columns
+													.small-2.columns
 														span.prefix Worth
-													.small-4.columns
+													.small-2.columns
 														input(name='points' type='number', placeholder='')
-													.small-3.columns
+													.small-2.columns
 														span.postfix Pts.
+													.small-6.columns
+														center
+															input(id="checkbox1" name='randomnized' type='checkbox')
+															label(for='random') Randomize?								
 										.large-1.columns
 											br
 										.large-8.columns
@@ -115,8 +117,6 @@ block pageContent
 																			span.prefix D:
 																		.small-10.columns
 																			input(type='text', placeholder='Daikon')
-												h4(style='float:right;margin-top:-125px;margin-right:-25px;', align='right')
-													font(color='F21111') x
 										.large-2.columns
 											a
 												
@@ -132,8 +132,4 @@ block pageContent
 
 					.row
 						.large-12.columns
-<<<<<<< HEAD
-						input(name='submit' value='Submit' type='submit')
-=======
-						input(name='submit' value='Submit' type='submit' onclick='handleSubmit(); return false;')
->>>>>>> FETCH_HEAD
+							input(name='submit' value='Submit' type='submit' onclick='handleSubmit(); return false;')

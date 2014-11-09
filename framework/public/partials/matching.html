@@ -3,16 +3,37 @@
         <div class="callout panel">
             <div class="row">
                 <div class="large-3 columns">
-                    <center>
-                        <h4>Question Type</h4>
-                    </center>
-                    <select form="newtestCreation" name="questionType" class="question-type">
-                        <option value="mtpl">Multiple Choice</option>
-                        <option value="shrt">Short Answer</option>
-                        <option value="mtch" selected>Matching</option>
-                        <option value="othr">Other</option>
-                    </select>
+          <center>
+            <h4>Question Type</h4>
+          </center>
+          <select form="newtestCreation" name="questionType" class="question-type">
+            <option value="mtpl">Multiple Choice</option>
+            <option value="shrt">Short Answer</option>
+            <option value="mtch">Matching</option>
+            <option value="othr">Other</option>
+          </select>
+          <div class="row">
+            <br>
+            <br>
+            <div class="large-12 columns">
+              <div class="row collapse">
+                <div class="small-2 columns"><span class="prefix">Worth</span>
                 </div>
+                <div class="small-2 columns">
+                  <input name="points" type="text" placeholder="">
+                </div>
+                <div class="small-2 columns"><span class="postfix">Pts.</span>
+                </div>
+                <div class="small-6 columns">
+                  <center>
+                    <input type="checkbox" id="checkbox1">
+                    <label for="random">Randomize</label>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
                 <div class="large-7 columns">
                     <center>
                         <h4>Question Info</h4>
@@ -141,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="large-2 columns"><a><h4 stlye="float:right;" align="right"><font color="F21111">×</font></h4></a>
+                <div class="large-2 columns">
                     <div class="row">
                         <br>
                         <br>
