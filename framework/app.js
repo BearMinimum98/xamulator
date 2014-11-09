@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Start sequelize
  */
-var Sequelize = require('sequelize'), sequelize = new Sequelize('xamulatordb', 'xamulatoradmin', 'xamulatorswag', {
+var Sequelize = require('sequelize'), sequelize = new Sequelize('postgres', 'xamulatoradmin', 'xamulatorswag', {
 	host: "xamulatordb.c626h2danuwm.us-west-2.rds.amazonaws.com",
 	port: 5432,
 	dialect: "postgres"
@@ -48,7 +48,7 @@ var Test = sequelize.define('Test', {
 	randomized: {type: Sequelize.BOOLEAN, defaultValue: false} 
 });
 var Question = sequelize.define('Question', {
-	type: {type: Sequelize.STRING, allowNull: true},	
+	type: {type: Sequelize.STRING, allowNull: false},
 	content: Sequelize.TEXT,
 	answers: Sequelize.TEXT,
 	correct: Sequelize.TEXT,

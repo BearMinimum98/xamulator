@@ -10,10 +10,10 @@ var rl = readline.createInterface({
 });
 
 var connection = mysql.createConnection({
-	host: "angelhack.c626h2danuwm.us-west-2.rds.amazonaws.com",
-	user: "angelhack",
-	password: "angelhack",
-	database: "testing"
+	host: "xamulatordb.c626h2danuwm.us-west-2.rds.amazonaws.com",
+	port: 5432,
+	user: "xamulatoradmin",
+	password: "xamulatorswag"
 });
 
 connection.connect();
