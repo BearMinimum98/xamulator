@@ -20,13 +20,7 @@ Installation:
 ------------
 
 ```
-npm install
-```
 
-Packages are now installed. Run the server on your specified port, defaulting to port 1337.
-
-```
-node app.js
 ```
 
 License
